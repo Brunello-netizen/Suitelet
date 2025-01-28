@@ -49,11 +49,9 @@ define(["N/ui/serverWidget", "N/search", "N/log", "N/record"], (serverWidget, se
     // Perform the Search
     var locationAvaiableFilter = [];
     if (request.method == "GET") {
-      log.debug("GET");
     } else if (request.method == "POST") {
       var selectedLocation = scriptContext.request.parameters.custpage_location_select;
       SL_LocationField.defaultValue = selectedLocation;
-      log.debug(selectedLocation);
       if (selectedLocation) {
         var locationRecord = record.load({
           type: "location",
@@ -61,12 +59,9 @@ define(["N/ui/serverWidget", "N/search", "N/log", "N/record"], (serverWidget, se
         });
 
         var locationName = locationRecord.getValue("name"); // Get the name of the location
-        log.debug("Selected Location Name", locationName);
-
         // Now, create a search and filter by location name
         locationAvaiableFilter = ["inventoryLocation.name", "is", locationName]; // Filter by location name
       }
-      log.debug("POST");
     }
 
     // Define the search
